@@ -1,0 +1,23 @@
+- 闭包
+- 原型链
+- this
+- promise
+- object的原型方法
+- 数组的方法
+- 数据类型
+- 闭包
+- 深浅拷贝
+- let const var
+  - es6
+- 函数传参
+  - 基础类型
+  - 对象类型
+
+- 手写
+- 防抖节流
+  - promise
+  - bind
+  - call
+  - apply
+  - 发布订阅模式
+  - vue 响应式原理

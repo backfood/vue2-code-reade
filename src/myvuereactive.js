@@ -71,6 +71,14 @@ class Watcher {
   }
 }
 
+function createComputed(computed, key) {
+  Object.defineProperty(computed, key, {
+    get() {
+      
+    },
+  });
+}
+
 function Vue(options) {
   this.data = options.data();
   const self = this;
@@ -99,11 +107,14 @@ const instansce = new Vue({
       b: 3,
     };
   },
+  computed: {
+    age() {},
+  },
 });
 
-instansce.mount();
+// instansce.mount();
 
-instansce.add();
+// instansce.add();
 
 // instansce.add();
 // instansce.add();

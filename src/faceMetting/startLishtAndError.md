@@ -1,0 +1,15 @@
+- 亮点与遇到的问题
+- 在嘉博主导开发了单点登录
+  - 通过设置 cookie 的 domain 实现，举例：百度与百度脑图
+  - 通过授权服务器，当前站点如果没有权限就跳转到授权站点，在授权站点获取到权限后，携带 token 返回刚才的未授权站点
+  - 使用 localstorage 跨域
+  - 跳转另一个网站携带本网站的 token
+- 2020 年报
+  - 太卡，没啥办法，使用动画 will-change、设置图层也没用，清后台就可以了
+- 2021 年报，动画缩放 0.51 倍，在执行动画时，参与动画的元素会集中到屏幕的左上角后恢复执行动画前的布局，在开始执行动画，导致动画会闪一下
+- [相关代码](https://github.com/zlc140/wxml2canvas/blob/master/src/index.js#L838)
+- 背景：wxml2canval，在绘制 dom 成元素时，通过延迟然某些元素最后绘制，使元素在图层的最上面
+- 当有多个 list，all[index]就会被后添加的 list 覆盖
+- 小程序 form 组件中的 input 组件，光标在 input 组件切换时，键盘会自动收起
+- input 组件上下动画时光标、placeholder 文字会错位
+- translate 和@keyframe 动画 的表现不一致
