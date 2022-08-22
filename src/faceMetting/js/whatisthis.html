@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #debouncedom,
+    #throttledom {
+      width: 300px;
+      height: 300px;
+      background-color: beige;
+      font-size: 20px;
+      line-height: 300px;
+      color: #5f5252;
+    }
+
+    #throttledom {
+      background: #9bb179;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="debouncedom">
+    <!-- 防抖 -->
+  </div>
+  <div id="throttledom">
+    <!-- 节流 -->
+  </div>
+  <script>
+    let count = 1
+    // 防抖节流函数
+    function debounce(fun, delay, immediate = false) {
+      let timer = null
+      return function () {
+        if (timer) { clearTimeout(timer) }
+
+        if (immediate) {
+          if (!timer) {
+            console.log("tigger")
+            fun(...arguments)
+          }
+          timer = setTimeout(() => {
+            timer = null
+          }, delay)
+        } else {
+          timer = setTimeout(() => {
+            fun(...arguments)
+          }, delay)
+        }
+      }
+    }
+    function throttle(fun, delay, immefiate = false) {
+      let timer = null
+      return function () {
+        if (timer) return
+        fun(...arguments)
+        timer = setTimeout(() => {
+          timer = null
+        }, delay)
+      }
+    }
+    document.getElementById("debouncedom").onmousemove = debounce(function () {
+      console.log(++count)
+    }, 1000, true)
+    document.getElementById("throttledom").onmousemove = throttle(function () {
+      console.log(++count)
+    }, 1000, true)
+
+  </script>
+  <script>
+    // this 指向问题
+    // https://zhuanlan.zhihu.com/p/26220116
+    /**
+     * 1. 观察调用栈的位置，调用栈的作用域拥有的 this 
+    */
+    //  函数
+    var a = 12
+    function foo() {
+      console.log(a, "此处调用的结果外部的a")
+    }
+    foo() // 此处调用的结果外部的a 12 全局的12
+    /**
+     * "use strict" 只会对当前执行内容域有效果
+    */
+  </script>
+  <script>
+    // 2. "use strict" 只会对当前执行内容域有效果
+    //  函数
+    var a = 12
+    function foo() {
+      console.log(a, "虽然调用处使用了use strict 但 此处调用的结果外部的a")
+    }
+    (function () {
+      'use strict'
+      foo() // 此处调用的结果外部的a 12 全局的12
+    })()
+  </script>
+  <script>
+    //3. 改变作用域
+    // 使用 apply call bind 特定函数（fearch）new  with
+    // 有些函数会明确作用域 如foreach
+    /**
+     * new 执行的过程
+     * 1.创建一个新的对象
+     * 2. 新对象接入原型链
+     * 3. 新对象被设置为函数调用的this绑定
+     * 4. 如果没有指定this返回，则返回新对象
+    */
+    var id = 5
+    var obj = {
+      id: 456789
+    }
+    var arr = [1, 2, 3, 4]
+
+    arr.forEach((ele) => {
+      console.log(ele, this.id, '全局的this')
+    }, obj);
+    arr.forEach(function (ele) {
+      console.log(ele, this.id, '局部的this')
+    }, obj);
+
+  </script>
+  <script>
+    // 绑定的优先级
+    /**
+     * 1 默认绑定 函数全局
+     * 2 隐含绑定 obj.a.foo()
+     * 3 明确绑定  call bind apply
+     * 4 new      new()
+     */
+    /**
+     * 如果一个函数即调用了apply也调用了 new  ，则在new时，
+     * 使用新构建的this
+    */
+    Function.prototype.myapply = function () {
+      console.log(this, "自定义的apply")
+    }
+    function func(status) {
+      console.log(this, "func函数的this", status)
+      console.log(this instanceof function () { })
+    }
+    func("直接调用的状态")
+    var bar = new func('new 状态')
+    function foo(something) {
+      this.a = something;
+    }
+
+    var obj1 = {};
+
+    var bar = foo.bind(obj1);
+    bar(2);
+    console.log(obj1.a); // 2
+
+    var baz = new bar(3);
+    console.log(obj1.a); // 2
+    console.log(baz.a); // 3
+  </script>
+  <script>
+    // 绑定特例
+    function foo(a, b) {
+      console.log("a:" + a + ", b:" + b);
+    }
+
+    // 将数组散开作为参数
+    foo.apply(null, [2, 3]); // a:2, b:3
+    // 用 `bind(..)` 进行柯里化
+    var bar = foo.bind(null, 2);
+    bar(3); // a:2, b:3
+    var ø = Object.create(null);
+    var baz = foo.bind(ø, [2, 6])
+
+  </script>
+  <script>
+    // 简介绑定
+    // 这是我看不懂的绑定
+    function foo() {
+      console.log(this.a);
+    }
+
+    var a = 2;
+    var o = { a: 3, foo: foo };
+    var p = { a: 4 };
+
+    o.foo(); // 3
+    (p.foo = o.foo)(); // 2
+
+  </script>
+  <script>
+    // 箭头函数 this
+    // 箭头函数的this取决于封闭他的函数，而不是在何处调用
+    function foo() {
+      // 返回一个箭头函数
+      return (a) => {
+        // 这里的 `this` 是词法上从 `foo()` 采用的
+        console.log(this.a);
+      };
+    }
+    var obj1 = {
+      a: 2
+    };
+    var obj2 = {
+      a: 3
+    };
+    var bar = foo.call(obj1);
+    bar.call(obj2); // 2, 不是3!
+
+  </script>
+  <script>
+    /**
+     * 复习 优先级
+     * 1 是否通过 new 
+     * 2 是否通过 call apply bind 
+     * 3 调用环境对象
+     * 4 是否使用 "use strict"
+    */
+  </script>
+</body>
+
+</html>

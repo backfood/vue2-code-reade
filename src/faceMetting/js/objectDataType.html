@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 基本数据类型
+    /** 六种基本数据类型
+     * null undefined string number object boolean
+    */
+    /**
+     * 还有一些內健对象
+     * string number object function array date regexp error ……
+    */
+    {
+      // object.preventExtensions // 防止拓展
+      var myObject = {
+        a: 2
+      };
+      Object.preventExtensions(myObject);
+      myObject.b = 3;
+      myObject.b; // undefined
+    }
+    {
+      // Object.seal 封印 
+      // 在 preventExtensions 的基础上将 configable置为false
+    }
+    {
+      // 存在性
+      var myObject = {
+        a: 2
+      };
+
+      ("a" in myObject);				// true
+      ("b" in myObject);				// false
+
+      myObject.hasOwnProperty("a");	// true
+      myObject.hasOwnProperty("b");	// false
+      // in 操作符会在原型上检查
+      // hasOwnProperty 仅检查当前属性
+    }
+    {
+      // 枚举属性 enumerable
+      // for in 遍历可枚举的属性，不可枚举的属性遍历不到
+      // obj.propertyIsEnumerable("key") 获取属性是否可枚举 
+      // Object.keys( myObject ); // 返回可枚举的属性
+      // propertyIsEnumerable和 object.keys只检查给定的对象
+    }
+    {
+      // 可迭代性
+      // for..of 循环要求被迭代的 东西 提供一个迭代器对象（从一个在语言规范中叫做 @@iterator 的默认内部函数那里得到），
+      // 每次循环都调用一次这个迭代器对象的 next() 方法，循环迭代的内容就是这些连续的返回值。
+
+      // 数组拥有内建的 @@iterator，所以正如展示的那样，for..of 对于它们很容易使用。
+      // 但是让我们使用内建的 @@iterator 来手动迭代一个数组，来看看它是怎么工作的：
+
+      var myArray = [1, 2, 3];
+      var it = myArray[Symbol.iterator]();
+
+      it.next(); // { value:1, done:false }
+      it.next(); // { value:2, done:false }
+      it.next(); // { value:3, done:false }
+      it.next(); // { done:true }
+    }
+  </script>
+</body>
+
+</html>
