@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    /**
+     *  静态方法
+     *  all 当所有ppromise对象都成功或有任意一个失败则返回所有成功的回调数组或失败的或失败的返回
+     *  allSettled 所有的promise状态都确定后（成功或失败），返回结果数组
+     *  any 任意成功就返回成功的值，如果没有一个成功的，就进入拒绝状态
+     *  race 任意一个promise的状态确定就返回结果
+     *  resolve 返回一个给定结果的promise
+    */
+    /**
+     *  实例方法
+     *  Promise.prototype.catch 拒绝状态的回调函数
+     *  Promise.prototype.then(fulfillmentFunc(value){},rejectionFunc(reason){}) 
+    */
+    var p1 = new Promise((resolve, reject) => {
+      resolve('成功！');
+      // or
+      // reject(new Error("出错了！"));
+    });
+
+    p1.then(value => {
+      console.log(value); // 成功！
+    }, reason => {
+      console.error(reason); // 出错了！
+    });
+
+  </script>
+</body>
+
+</html>

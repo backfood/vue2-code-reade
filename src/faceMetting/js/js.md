@@ -2,13 +2,13 @@
   - 可获取其他作用于变量的函数
   - 举例：防抖节流函数
 - 原型链 (先放弃，还是觉得有点不太明白)
-- this
-- promise
-- object 的原型方法
-- 数组的方法
-- 数据类型
-- 闭包
-- 深浅拷贝
+- this done
+- promise done (有时间可以看看示例 https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise#promise_%E7%9A%84%E9%93%BE%E5%BC%8F%E8%B0%83%E7%94%A8)
+- object 的原型方法 (先掠过)
+- 数组的方法 （先掠过）
+- 数据类型 done
+- 闭包 done
+- 深浅拷贝 
 - esm 与 es6 模块
 - null undefined 的区别
 - let const var
