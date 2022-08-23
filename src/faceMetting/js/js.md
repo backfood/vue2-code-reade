@@ -9,8 +9,8 @@
 - 数据类型 done
 - 闭包 done
 - 深浅拷贝 done
-- esm 与 es6 模块
-- null undefined 的区别
+- commonjs 与 es6 模块 done
+- null undefined 的区别 
 - let const var
   - es6
 - 函数传参
