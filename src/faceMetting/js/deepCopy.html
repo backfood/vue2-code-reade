@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>deepcopy</title>
+</head>
+
+<body>
+  <script>
+    /**
+     * js 有两大类数据类型
+     * 基本数据类型 string number boolean null undefined
+     * 引用数据类型 object array function
+    */
+    /**
+     * 浅拷贝的三种方式
+    */
+    // 1. 展开运算符
+    let a = {
+      name: "张三",
+      age: 19,
+      son: {
+        age: 1
+      },
+      getName() {
+        return this.name
+      }
+    }
+    let b = { ...a }
+    b.name = ""
+    b.son.age = 2
+    console.log('a', a)
+    console.log('b', b)
+    // 2. 数组的slice contact
+    // 当数据时引用类型时，拷贝就失效了 同理 Object.assign也是
+    // 举例
+    let arr = [[1, 2], 3, 4, 5]
+    let newArr = arr.slice()
+    newArr[0].push(10)
+    console.log('arr', arr)
+    console.log('newArr', newArr)
+    // 深拷贝
+    // 1. JSON.stringfy JSON.parse 
+    //  正则转成了{}，事件对象转成了字符串，函数丢失
+    // NAN infinity 变成null
+    // 构造函数生成的实例函数会丢失 constructor
+    let c = JSON.parse(JSON.stringify(a))
+    console.log('c', c) // 此时 c 的函数没了
+    function clone(source) {
+      if (typeof source !== "object") return source
+      let obj = Array.isArray(source) ? [] : {}
+      for (let key in source) {
+        obj[key] = typeof source[key] === "object" ? clone(source[key]) : source[key]
+      }
+      return obj
+    }
+    let d = clone(a)
+    console.log('d', d)
+  </script>
+</body>
+
+</html>

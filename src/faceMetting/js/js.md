@@ -8,7 +8,7 @@
 - 数组的方法 （先掠过）
 - 数据类型 done
 - 闭包 done
-- 深浅拷贝 
+- 深浅拷贝 done
 - esm 与 es6 模块
 - null undefined 的区别
 - let const var
