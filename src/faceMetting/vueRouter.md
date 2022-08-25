@@ -1,2 +1,25 @@
 - 原理
 - api
+- https://zhuanlan.zhihu.com/p/348210293
+- history
+  - 基于浏览器 history，兼容到 ie10
+  - 需要后端配置，因为刷新页面就要向后端做请求，所以后端要配置默认返回 index.html(静态资源另当别论)
+  - 前端将没有匹配的到的页面显示 404.vue
+- hash
+
+  - 基于锚点以及 onhashchange 事件
+
+- 路由守卫
+  - 全局
+    - beforeEach
+    - afterEach
+    - beforeResolve 看不懂
+  - 路由守卫
+    - beforeEnter
+      - 只在进入路由时触发
+  - 组件内守卫
+    - beforeRouteEnter
+    - beforeRouteUpdate
+    - beforeRouteLeave
+- 在组合式 api 中使用
+  - useRouter, useRoute, RouterLink, useLink, onBeforeRouteLeave, onBeforeRouteUpdate
