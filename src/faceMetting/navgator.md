@@ -1,4 +1,0 @@
-- 浏览器地址栏输入地址按下enter到显示页面发生了什么
-- 浏览器进程
-- localstorage、sessionstorage、cookie
-- 请求头类型
