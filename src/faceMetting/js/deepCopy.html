@@ -60,6 +60,37 @@
     let d = clone(a)
     console.log('d', d)
   </script>
+  <script>
+    // https://zhuanlan.zhihu.com/p/432726048
+    /**
+     * 异步宏任务
+    */
+    /**
+     * MessageChannel 在发送消息和接受消息的时候会进行序列化和反序列化，故可应用于深拷贝
+    */
+    // 当消息包含函数、Symbol等不可序列化的值时，就会报无法克隆的DOM异常。
+    function deepClone(obj) {
+      return new Promise((resolve, reject) => {
+        try {
+          const { port1, port2 } = new MessageChannel();
+
+          port2.onmessage = function (e) {
+            resolve(e.data);
+          };
+          port1.postMessage(obj);
+        } catch (e) {
+          reject(e);
+        }
+      });
+    }
+
+    const oldObj = { a: { b: 1 } };
+    deepClone(oldObj).then((newObj) => {
+      console.log(oldObj === newObj); // false
+      newObj.a.b = 2;
+      console.log(oldObj.a.b); // 1
+    });
+  </script>
 </body>
 
 </html>
