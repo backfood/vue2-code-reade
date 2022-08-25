@@ -26,6 +26,27 @@
   <div id="container">
     <p>p标签中得文字</p>
   </div>
+  <div>
+    普通图层与复合图层
+    <br>
+    普通文档流可以认为一个复合图层，
+    通过硬件加速，声明一个新的复合图层，会单独分配资源，
+    元素变成复合图层，
+    <ul>
+      <li>
+        translate3D、translateZ
+      </li>
+      <li>
+        opacity——动画执行过程中创建复合图层
+      </li>
+      <li>
+        will-change、z-index。如果a是一个复合图层，而且b在a上面，那么b也会被隐式转为一个复合图层
+      </li>
+      <li>
+        video、iframe、canvas、webgl
+      </li>
+    </ul>
+  </div>
 </body>
 
 </html>
