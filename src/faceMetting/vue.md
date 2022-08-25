@@ -1,2 +1,4 @@
 - 响应式原理
-- dom比较过程
+- dom 比较过程
+  - 新旧dom头尾节点比较，如果头尾节点相同就更新否则就移动节点。
+- vue 之前是 nexttick MutationObserver 现在用 MessageChannel setImmediate
