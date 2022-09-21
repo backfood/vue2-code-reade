@@ -73,9 +73,7 @@ class Watcher {
 
 function createComputed(computed, key) {
   Object.defineProperty(computed, key, {
-    get() {
-      
-    },
+    get() {},
   });
 }
 
@@ -112,11 +110,11 @@ const instansce = new Vue({
   },
 });
 
-// instansce.mount();
+instansce.mount();
 
 // instansce.add();
 
 // instansce.add();
-// instansce.add();
+instansce.add();
 
-// console.log(instansce.data.a, "最终值");
+console.log(instansce.data.a, "最终值");
