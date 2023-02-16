@@ -1,3 +1,16 @@
+/**
+ * 
+ * 1 遍历 option data属性，使用dedineproterty监听get和set动作。相当于event.on
+ *  当get时，dep.deppend,set时，dep.notify
+ * 2 挂载实例，这个过程会使用 new watcher 函数，watch函数接受两个参数 一个对象，
+ *  以及这个对象改变时要执行的 render 函数。
+ *  在nes wacher时会执行一次render函数，此时就会触发 option 选项中的data属性值的get函数。
+ * 此时执行dep.deppend。此时dep.target 为 vm 。
+ *  调用链为 dep.deppend->dep.target.addDep->dep.addSub->dep.subs.push(watcher) 。此时依赖收集完成。
+ * 3 当set data 时，触发dep.notify,接着会遍历dep.subs数组。执行watcher.updata-> vm.render
+ */
+
+
 const Observer = function (data) {
   // 循环修改为每个属性添加get set
   for (let key in data) {
